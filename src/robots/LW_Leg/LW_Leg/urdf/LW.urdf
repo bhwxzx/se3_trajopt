@@ -1,0 +1,452 @@
+<?xml version="1.0"?>
+<robot name="LW">
+  <link name="base_link">
+    <inertial>
+      <origin
+        xyz="0.08622748 -0.00009382 -0.03217461"
+        rpy="0 0 0" />
+      <mass
+        value="10.80229497" />
+      <inertia
+        ixx="0.11709101"
+        ixy="-0.00048950"
+        ixz="-0.00942922"
+        iyy="0.12021585"
+        iyz="0.00018346"
+        izz="0.11536991" />
+    </inertial>
+    <visual>
+      <origin xyz="0.000000 0.000000 0.000000" rpy="0.000000 0.000000 0.000000"/>
+      <geometry>
+        <mesh filename="meshes/base_link.stl"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0.000000 0.000000 0.000000" rpy="0.000000 0.000000 0.000000"/>
+      <geometry>
+        <mesh filename="meshes/base_link.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="right_hip_link">
+    <inertial>
+      <origin
+        xyz="0.01340414 0.00183962 0.00079948"
+        rpy="0 0 0" />
+      <mass
+        value="1.72818563" />
+      <inertia
+        ixx="0.00165391"
+        ixy="0.00027486"
+        ixz="0.00003201"
+        iyy="0.00319020"
+        iyz="0.00000622"
+        izz="0.00286098" />
+    </inertial>
+    <visual>
+      <origin xyz="0.000000 0.000000 0.000000" rpy="0.000000 0.000000 0.000000"/>
+      <geometry>
+        <mesh filename="meshes/right_hip.stl"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0.000000 0.000000 0.000000" rpy="0.000000 0.000000 0.000000"/>
+      <geometry>
+        <mesh filename="meshes/right_hip.stl"/>
+      </geometry>
+      <!-- <origin xyz="0 0 0" rpy="1.57 0 0"/>
+        <geometry>
+            <cylinder length="0.05" radius="0.05"/>
+        </geometry> -->
+    </collision>
+  </link>
+  <link name="right_thigh_link">
+    <inertial>
+      <origin
+        xyz="0.00174903 0.01643291 -0.19383909"
+        rpy="0 0 0" />
+      <mass
+        value="2.16888452" />
+      <inertia
+        ixx="0.02576180"
+        ixy="0.00001908"
+        ixz="0.00026483"
+        iyy="0.02681836"
+        iyz="0.00092532"
+        izz="0.00237267" />
+    </inertial>
+    <visual>
+      <origin xyz="0.000000 0.000000 0.000000" rpy="0.000000 0.000000 0.000000"/>
+      <geometry>
+        <mesh filename="meshes/right_thigh.stl"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0.000000 0.000000 0.000000" rpy="0.000000 0.000000 0.000000"/>
+      <geometry>
+        <mesh filename="meshes/right_thigh.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="right_shank_link">
+    <inertial>
+      <origin
+        xyz="-0.09288440 -0.01658216 -0.01223815"
+        rpy="0 0 0" />
+      <mass
+        value="2.30578457" />
+      <inertia
+        ixx="0.09092903"
+        ixy="-0.00157189"
+        ixz="-0.03532732"
+        iyy="0.10932477"
+        iyz="-0.00205094"
+        izz="0.01992021" />
+    </inertial>
+    <visual>
+      <origin xyz="0.000000 0.000000 0.000000" rpy="0.000000 0.000000 0.000000"/>
+      <geometry>
+        <mesh filename="meshes/right_shank.stl"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0.000000 0.000000 0.000000" rpy="0.000000 0.000000 0.000000"/>
+      <geometry>
+        <mesh filename="meshes/right_shank.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="right_wheel_link">
+    <inertial>
+      <origin
+        xyz="0.0 -0.00436057 0.0"
+        rpy="0 0 0" />
+      <mass
+        value="1.22089955" />
+      <inertia
+        ixx="0.00407557"
+        ixy="0.0"
+        ixz="0.0"
+        iyy="0.00773266"
+        iyz="0.0"
+        izz="0.00407557" />
+    </inertial>
+    <visual>
+      <origin xyz="0.000000 0.000000 0.000000" rpy="0.000000 0.000000 0.000000"/>
+      <geometry>
+        <mesh filename="meshes/right_wheel.stl"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0.000000 0.000000 0.000000" rpy="0.000000 0.000000 0.000000"/>
+      <geometry>
+        <mesh filename="meshes/right_wheel.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="right_foot_link">
+    <inertial>
+      <origin
+        xyz="0.0 0.00040100 0.04890106"
+        rpy="0 0 0" />
+      <mass
+        value="0.44560421"/>
+      <inertia
+        ixx="0.00043846"
+        ixy="0.0"
+        ixz="0.0"
+        iyy="0.00103428"
+        iyz="0.00001060"
+        izz="0.00127123" />
+    </inertial>
+    <visual>
+      <origin xyz="0.000000 0.000000 0.000000" rpy="0.000000 0.000000 0.000000"/>
+      <geometry>
+        <mesh filename="meshes/right_foot.stl"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0.000000 0.000000 0.000000" rpy="0.000000 0.000000 0.000000"/>
+      <geometry>
+        <mesh filename="meshes/right_foot.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="left_hip_link">
+    <inertial>
+      <origin
+        xyz="0.00900513 -0.00183962 0.00079947"
+        rpy="0 0 0" />
+      <mass
+        value="1.72818563" />
+      <inertia
+        ixx="0.00165391"
+        ixy="-0.00023325"
+        ixz="-0.00000105"
+        iyy="0.00336057"
+        iyz="-0.00000622"
+        izz="0.00303134" />
+    </inertial>
+    <visual>
+      <origin xyz="0.000000 0.000000 0.000000" rpy="0.000000 0.000000 0.000000"/>
+      <geometry>
+        <mesh filename="meshes/left_hip.stl"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0.000000 0.000000 0.000000" rpy="0.000000 0.000000 0.000000"/>
+      <geometry>
+        <mesh filename="meshes/left_hip.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="left_thigh_link">
+    <inertial>
+      <origin
+        xyz="-0.00175614 -0.01643299 -0.19384029"
+        rpy="0 0 0" />
+      <mass
+        value="2.16887113"/>
+      <inertia
+        ixx="0.02576130"
+        ixy="0.00001943"
+        ixz="-0.00026512"
+        iyy="0.02681777"
+        iyz="-0.00092528"
+        izz="0.00237258" />
+    </inertial>
+    <visual>
+      <origin xyz="0.000000 0.000000 0.000000" rpy="0.000000 0.000000 0.000000"/>
+      <geometry>
+        <mesh filename="meshes/left_thigh.stl"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0.000000 0.000000 0.000000" rpy="0.000000 0.000000 0.000000"/>
+      <geometry>
+        <mesh filename="meshes/left_thigh.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="left_shank_link">
+    <inertial>
+      <origin
+        xyz="-0.09290562 0.01658216 -0.01221693"
+        rpy="0 0 0" />
+      <mass
+        value="2.30578457" />
+      <inertia
+        ixx="0.09091198"
+        ixy="0.00157085"
+        ixz="-0.03533124"
+        iyy="0.10931687"
+        iyz="0.00205198"
+        izz="0.01992936" />
+    </inertial>
+    <visual>
+      <origin xyz="0.000000 0.000000 0.000000" rpy="0.000000 0.000000 0.000000"/>
+      <geometry>
+        <mesh filename="meshes/left_shank.stl"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0.000000 0.000000 0.000000" rpy="0.000000 0.000000 0.000000"/>
+      <geometry>
+        <mesh filename="meshes/left_shank.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="left_wheel_link">
+    <inertial>
+      <origin
+        xyz="0.0 0.00436057 0.0"
+        rpy="0 0 0" />
+      <mass
+        value="1.22089955" />
+      <inertia
+        ixx="0.00407557"
+        ixy="0.0"
+        ixz="0.0"
+        iyy="0.00773266"
+        iyz="0.0"
+        izz="0.00407557" />
+    </inertial>
+    <visual>
+      <origin xyz="0.000000 0.000000 0.000000" rpy="0.000000 0.000000 0.000000"/>
+      <geometry>
+        <mesh filename="meshes/left_wheel.stl"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0.000000 0.000000 0.000000" rpy="0.000000 0.000000 0.000000"/>
+      <geometry>
+        <mesh filename="meshes/left_wheel.stl"/>
+      </geometry>
+    </collision>
+  </link>
+  <link name="left_foot_link">
+    <inertial>
+      <origin
+        xyz="0.0 -0.00040100 0.04890106"
+        rpy="0 0 0" />
+      <mass
+        value="0.44560421" />
+      <inertia
+        ixx="0.00043846"
+        ixy="0.0"
+        ixz="0.0"
+        iyy="0.00103428"
+        iyz="-0.00001060"
+        izz="0.00127123" />
+    </inertial>
+    <visual>
+      <origin xyz="0.000000 0.000000 0.000000" rpy="0.000000 0.000000 0.000000"/>
+      <geometry>
+        <mesh filename="meshes/left_foot.stl"/>
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="0.000000 0.000000 0.000000" rpy="0.000000 0.000000 0.000000"/>
+      <geometry>
+        <mesh filename="meshes/left_foot.stl"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <!--脚底虚拟接触点-->
+  <link name="right_foot_upper_right"/>
+  <link name="right_foot_upper_left"/>
+  <link name="right_foot_lower_right"/>
+  <link name="right_foot_lower_left"/>
+  <link name="left_foot_upper_right"/>
+  <link name="left_foot_upper_left"/>
+  <link name="left_foot_lower_right"/>
+  <link name="left_foot_lower_left"/>
+  <!--轮底滚动虚拟接触点-->
+  <link name="right_wheel_contact_link"/>
+  <link name="left_wheel_contact_link"/>
+
+  <joint name="right_foot_upper_right_fix_joint" type="fixed">
+    <parent link="right_foot_link"/>
+    <child link="right_foot_upper_right"/>
+    <origin xyz="-0.065 -0.03 0.07" rpy="0 3.1415926 0"/>
+  </joint>
+  <joint name="right_foot_upper_left_fix_joint" type="fixed">
+    <parent link="right_foot_link"/>
+    <child link="right_foot_upper_left"/>
+    <origin xyz="-0.065 0.03 0.07" rpy="0 3.1415926 0"/>
+  </joint>
+  <joint name="right_foot_lower_right_fix_joint" type="fixed">
+    <parent link="right_foot_link"/>
+    <child link="right_foot_lower_right"/>
+    <origin xyz="0.065 -0.03 0.07" rpy="0 3.1415926 0"/>
+  </joint>
+  <joint name="right_foot_lower_left_fix_joint" type="fixed">
+    <parent link="right_foot_link"/>
+    <child link="right_foot_lower_left"/>
+    <origin xyz="0.065 0.03 0.07" rpy="0 3.1415926 0"/>
+  </joint>
+
+  <joint name="left_foot_upper_right_fix_joint" type="fixed">
+    <parent link="left_foot_link"/>
+    <child link="left_foot_upper_right"/>
+    <origin xyz="-0.065 -0.03 0.07" rpy="0 3.1415926 0"/>
+  </joint>
+  <joint name="left_foot_upper_left_fix_joint" type="fixed">
+    <parent link="left_foot_link"/>
+    <child link="left_foot_upper_left"/>
+    <origin xyz="-0.065 0.03 0.07" rpy="0 3.1415926 0"/>
+  </joint>
+  <joint name="left_foot_lower_right_fix_joint" type="fixed">
+    <parent link="left_foot_link"/>
+    <child link="left_foot_lower_right"/>
+    <origin xyz="0.065 -0.03 0.07" rpy="0 3.1415926 0"/>
+  </joint>
+  <joint name="left_foot_lower_left_fix_joint" type="fixed">
+    <parent link="left_foot_link"/>
+    <child link="left_foot_lower_left"/>
+    <origin xyz="0.065 0.03 0.07" rpy="0 3.1415926 0"/>
+  </joint>
+
+  <joint name="right_wheel_contact_joint" type="fixed">
+    <parent link="right_shank_link"/>
+    <child link="right_wheel_contact_link"/>
+    <origin xyz="-0.241876 -0.061000 -0.276711" rpy="0 0 0"/>
+  </joint>
+  <joint name="left_wheel_contact_joint" type="fixed">
+    <parent link="left_shank_link"/>
+    <child link="left_wheel_contact_link"/>
+    <origin xyz="-0.241876 0.061000 -0.276711" rpy="0 0 0"/>
+  </joint>
+
+  <joint name="right_hip_joint" type="revolute">
+    <parent link="base_link"/>
+    <child link="right_hip_link"/>
+    <origin xyz="-0.077000 -0.080000 -0.115700" rpy="0.000000 -0.000000 0.000000"/>
+    <axis xyz="-1.000000 0.000000 0.000000"/>
+    <limit lower="-1.570796" upper="1.570796" effort="120.000000" velocity="20.000000"/>
+  </joint>
+  <joint name="left_hip_joint" type="revolute">
+    <parent link="base_link"/>
+    <child link="left_hip_link"/>
+    <origin xyz="-0.077000 0.080000 -0.115700" rpy="0.000000 -0.000000 0.000000"/>
+    <axis xyz="-1.000000 0.000000 0.000000"/>
+    <limit lower="-1.570796" upper="1.570796" effort="120.000000" velocity="20.000000"/>
+  </joint>
+  <joint name="right_thigh_joint" type="revolute">
+    <parent link="right_hip_link"/>
+    <child link="right_thigh_link"/>
+    <origin xyz="0.000000 -0.072000 0.000000" rpy="0.000000 -0.000000 0.000000"/>
+    <axis xyz="0.000000 -1.000000 0.000000"/>
+    <limit lower="-1.570796" upper="1.570796" effort="120.000000" velocity="20.000000"/>
+  </joint>
+  <joint name="left_thigh_joint" type="revolute">
+    <parent link="left_hip_link"/>
+    <child link="left_thigh_link"/>
+    <origin xyz="0.000000 0.072000 0.000000" rpy="0.000000 -0.000000 0.000000"/>
+    <axis xyz="0.000000 1.000000 0.000000"/>
+    <limit lower="-1.570796" upper="1.570796" effort="120.000000" velocity="20.000000"/>
+  </joint>
+  <joint name="right_shank_joint" type="revolute">
+    <parent link="right_thigh_link"/>
+    <child link="right_shank_link"/>
+    <origin xyz="0.000000 -0.045000 -0.260000" rpy="0.000000 -0.000000 0.000000"/>
+    <axis xyz="0.000000 -1.000000 0.000000"/>
+    <limit lower="-3.141593" upper="3.141593" effort="120.000000" velocity="20.000000"/>
+  </joint>
+  <joint name="left_shank_joint" type="revolute">
+    <parent link="left_thigh_link"/>
+    <child link="left_shank_link"/>
+    <origin xyz="0.000000 0.045000 -0.260000" rpy="0.000000 -0.000000 0.000000"/>
+    <axis xyz="0.000000 1.000000 0.000000"/>
+    <limit lower="-3.141593" upper="3.141593" effort="120.000000" velocity="20.000000"/>
+  </joint>
+  <joint name="right_wheel_joint" type="revolute">
+    <parent link="right_shank_link"/>
+    <child link="right_wheel_link"/>
+    <origin xyz="-0.183850 -0.061000 -0.183850" rpy="0.000000 -0.000000 0.000000"/>
+    <axis xyz="0.000000 -1.000000 0.000000"/>
+    <limit lower="-100.0" upper="100.0" effort="40.000000" velocity="33.000000"/>
+  </joint>
+  <joint name="left_wheel_joint" type="revolute">
+    <parent link="left_shank_link"/>
+    <child link="left_wheel_link"/>
+    <origin xyz="-0.183850 0.061000 -0.183850" rpy="0.000000 -0.000000 0.000000"/>
+    <axis xyz="0.000000 1.000000 0.000000"/>
+    <limit lower="-100.0" upper="100.0" effort="40.000000" velocity="33.000000"/>
+  </joint>
+  <joint name="right_foot_joint" type="revolute">
+    <parent link="right_shank_link"/>
+    <child link="right_foot_link"/>
+    <origin xyz="0.000000 -0.013000 0.307000" rpy="0.000000 -0.000000 0.000000"/>
+    <axis xyz="0.000000 -1.000000 0.000000"/>
+    <limit lower="-1.919862" upper="1.919862" effort="27.000000" velocity="10.000000"/>
+  </joint>
+  <joint name="left_foot_joint" type="revolute">
+    <parent link="left_shank_link"/>
+    <child link="left_foot_link"/>
+    <origin xyz="0.000000 0.013000 0.307000" rpy="0.000000 -0.000000 0.000000"/>
+    <axis xyz="0.000000 1.000000 0.000000"/>
+    <limit lower="-1.919862" upper="1.919862" effort="27.000000" velocity="10.000000"/>
+  </joint>
+</robot>
