@@ -1,0 +1,4 @@
+interface:
+  display_name: "Inspect Context Compactions"
+  short_description: "Verify Codex session compaction counts"
+  default_prompt: "Use $inspect-context-compactions to verify how many times the current Codex session has been compacted."
