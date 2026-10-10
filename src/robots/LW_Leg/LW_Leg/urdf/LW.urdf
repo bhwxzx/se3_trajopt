@@ -384,69 +384,69 @@
     <child link="right_hip_link"/>
     <origin xyz="-0.077000 -0.080000 -0.115700" rpy="0.000000 -0.000000 0.000000"/>
     <axis xyz="-1.000000 0.000000 0.000000"/>
-    <limit lower="-1.570796" upper="1.570796" effort="120.000000" velocity="20.000000"/>
+    <limit lower="-1.570796" upper="1.570796" effort="105.000000" velocity="20.000000"/>
   </joint>
   <joint name="left_hip_joint" type="revolute">
     <parent link="base_link"/>
     <child link="left_hip_link"/>
     <origin xyz="-0.077000 0.080000 -0.115700" rpy="0.000000 -0.000000 0.000000"/>
     <axis xyz="-1.000000 0.000000 0.000000"/>
-    <limit lower="-1.570796" upper="1.570796" effort="120.000000" velocity="20.000000"/>
+    <limit lower="-1.570796" upper="1.570796" effort="105.000000" velocity="20.000000"/>
   </joint>
   <joint name="right_thigh_joint" type="revolute">
     <parent link="right_hip_link"/>
     <child link="right_thigh_link"/>
     <origin xyz="0.000000 -0.072000 0.000000" rpy="0.000000 -0.000000 0.000000"/>
     <axis xyz="0.000000 -1.000000 0.000000"/>
-    <limit lower="-1.570796" upper="1.570796" effort="120.000000" velocity="20.000000"/>
+    <limit lower="-1.570796" upper="1.570796" effort="105.000000" velocity="20.000000"/>
   </joint>
   <joint name="left_thigh_joint" type="revolute">
     <parent link="left_hip_link"/>
     <child link="left_thigh_link"/>
     <origin xyz="0.000000 0.072000 0.000000" rpy="0.000000 -0.000000 0.000000"/>
     <axis xyz="0.000000 1.000000 0.000000"/>
-    <limit lower="-1.570796" upper="1.570796" effort="120.000000" velocity="20.000000"/>
+    <limit lower="-1.570796" upper="1.570796" effort="105.000000" velocity="20.000000"/>
   </joint>
   <joint name="right_shank_joint" type="revolute">
     <parent link="right_thigh_link"/>
     <child link="right_shank_link"/>
     <origin xyz="0.000000 -0.045000 -0.260000" rpy="0.000000 -0.000000 0.000000"/>
     <axis xyz="0.000000 -1.000000 0.000000"/>
-    <limit lower="-3.141593" upper="3.141593" effort="120.000000" velocity="20.000000"/>
+    <limit lower="-3.141593" upper="3.141593" effort="105.000000" velocity="20.000000"/>
   </joint>
   <joint name="left_shank_joint" type="revolute">
     <parent link="left_thigh_link"/>
     <child link="left_shank_link"/>
     <origin xyz="0.000000 0.045000 -0.260000" rpy="0.000000 -0.000000 0.000000"/>
     <axis xyz="0.000000 1.000000 0.000000"/>
-    <limit lower="-3.141593" upper="3.141593" effort="120.000000" velocity="20.000000"/>
+    <limit lower="-3.141593" upper="3.141593" effort="105.000000" velocity="20.000000"/>
   </joint>
   <joint name="right_wheel_joint" type="revolute">
     <parent link="right_shank_link"/>
     <child link="right_wheel_link"/>
     <origin xyz="-0.183850 -0.061000 -0.183850" rpy="0.000000 -0.000000 0.000000"/>
     <axis xyz="0.000000 -1.000000 0.000000"/>
-    <limit lower="-100.0" upper="100.0" effort="40.000000" velocity="33.000000"/>
+    <limit lower="-100.0" upper="100.0" effort="35.000000" velocity="33.000000"/>
   </joint>
   <joint name="left_wheel_joint" type="revolute">
     <parent link="left_shank_link"/>
     <child link="left_wheel_link"/>
     <origin xyz="-0.183850 0.061000 -0.183850" rpy="0.000000 -0.000000 0.000000"/>
     <axis xyz="0.000000 1.000000 0.000000"/>
-    <limit lower="-100.0" upper="100.0" effort="40.000000" velocity="33.000000"/>
+    <limit lower="-100.0" upper="100.0" effort="35.000000" velocity="33.000000"/>
   </joint>
   <joint name="right_foot_joint" type="revolute">
     <parent link="right_shank_link"/>
     <child link="right_foot_link"/>
     <origin xyz="0.000000 -0.013000 0.307000" rpy="0.000000 -0.000000 0.000000"/>
     <axis xyz="0.000000 -1.000000 0.000000"/>
-    <limit lower="-1.919862" upper="1.919862" effort="27.000000" velocity="10.000000"/>
+    <limit lower="-1.919862" upper="1.919862" effort="25.000000" velocity="10.000000"/>
   </joint>
   <joint name="left_foot_joint" type="revolute">
     <parent link="left_shank_link"/>
     <child link="left_foot_link"/>
     <origin xyz="0.000000 0.013000 0.307000" rpy="0.000000 -0.000000 0.000000"/>
     <axis xyz="0.000000 1.000000 0.000000"/>
-    <limit lower="-1.919862" upper="1.919862" effort="27.000000" velocity="10.000000"/>
+    <limit lower="-1.919862" upper="1.919862" effort="25.000000" velocity="10.000000"/>
   </joint>
 </robot>
