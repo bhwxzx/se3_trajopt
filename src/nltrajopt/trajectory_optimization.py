@@ -95,7 +95,11 @@ class NLTrajOpt:
         for constraint in self.nodes[-1].constraints_list:
             constraint.get_structure_ids(self.nodes[-1], None, row_ids, col_ids)
 
-        return row_ids, col_ids
+        # Constraints may declare overlapping blocks. jacobian() indexes an
+        # already assembled dense matrix; repeated coordinates would make
+        # sparse consumers (including IPOPT) sum the same derivative twice.
+        pairs = list(dict.fromkeys(zip(row_ids, col_ids)))
+        return [r for r, _ in pairs], [c for _, c in pairs]
 
     def _initialize_bounds(self):
         """Set default variable and constraint bounds"""
@@ -347,6 +351,14 @@ class NLTrajOpt:
                 result["forces"][frame] = sol[node.forces_ids[frame]]
                 result["contact_positions"][frame] = sol[node.contact_pos_ids[frame]]
 
+            if hasattr(node,'stance_end_a_id'):
+                result['stance_end_a']=sol[node.stance_end_a_id]
+                result['stance_end_forces']={f:sol[ids] for f,ids in node.stance_end_forces_ids.items()}
+            if hasattr(node, 'rolling_projection_id'):
+                result['rolling_projection'] = sol[node.rolling_projection_id]
+            if hasattr(node,'midpoint_forces_ids'):
+                result['midpoint_forces']={f:sol[ids] for f,ids in node.midpoint_forces_ids.items()}
+
             results.append(result)
         return results
 
@@ -375,6 +387,8 @@ class NLTrajOpt:
             },
             "solution": {"nodes": []},
         }
+        if hasattr(self, "wheel_contact_model"):
+            save_data["info"]["wheel_contact_model"] = self.wheel_contact_model.metadata()
 
         # Convert numpy arrays to lists for JSON serialization
         for node in solution_dict["nodes"]:
@@ -384,6 +398,7 @@ class NLTrajOpt:
                 "v": node["v"].tolist(),
                 "a": node["a"].tolist(),
                 "forces": {k: v.tolist() for k, v in node["forces"].items()},
+                "contact_positions": {k: v.tolist() for k, v in node.get("contact_positions", {}).items()},
             }
             save_data["solution"]["nodes"].append(node_data)
 
@@ -410,7 +425,7 @@ class NLTrajOpt:
         # Reconstruct the solution dictionary
         solution_dict = {
             "info": {
-                "solve_time": data["info"]["solve_time"],
+                **data["info"],
                 "iter": data["info"]["iterations"],
             },
             "solution": None,  # Will be filled below
@@ -425,6 +440,7 @@ class NLTrajOpt:
                 "v": np.array(node_data["v"]),
                 "a": np.array(node_data["a"]),
                 "forces": {k: np.array(v) for k, v in node_data["forces"].items()},
+                "contact_positions": {k: np.array(v) for k, v in node_data.get("contact_positions", {}).items()},
             }
             solution_dict["nodes"].append(node)
 

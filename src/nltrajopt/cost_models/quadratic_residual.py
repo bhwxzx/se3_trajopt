@@ -115,3 +115,44 @@ class BasePosVelocityCost(AbstractCostFunction):
         res = self.compute_residual(var)
         jac = self.compute_gradient(res)
         cost_grad[node.vq_id.start : node.vq_id.start + 3] += jac
+
+class JointSymmetryCost(AbstractCostFunction):
+    """惩罚左右关节不对称的代价函数"""
+    def __init__(self, right_indices, left_indices, weight_matrix, signs):
+        # 左右对应的关节索引
+        self.r_idx = np.array(right_indices, dtype=int)
+        self.l_idx = np.array(left_indices, dtype=int)
+        # 符号标识：1 表示同向对称 (q_r = q_l), -1 表示镜像对称 (q_r = -q_l)
+        self.signs = np.array(signs)
+        # 惩罚权重矩阵
+        self.W = weight_matrix
+
+    def obj(self, opt_vect, node, next_node):
+        # 提取当前所有 10 个驱动关节的角度
+        q_joints = opt_vect[node.q_id.start + 6 : node.q_id.stop].flatten()
+        
+        # 计算残差: e = q_right - sign * q_left
+        res = (q_joints[self.r_idx] - self.signs * q_joints[self.l_idx]).reshape(-1, 1)
+        
+        # 代价: Cost = 0.5 * e^T * W * e
+        cost = 0.5 * res.T @ self.W @ res
+        return cost[0, 0]
+
+    def grad(self, opt_vect, cost_grad, node, next_node):
+        q_joints = opt_vect[node.q_id.start + 6 : node.q_id.stop].flatten()
+        res = (q_joints[self.r_idx] - self.signs * q_joints[self.l_idx]).reshape(-1, 1)
+        
+        # dCost/dRes = W * res
+        dcost_dres = self.W @ res
+        
+        # 初始化关节梯度容器
+        jac_joints = np.zeros(node.q_id.stop - (node.q_id.start + 6))
+        
+        # 根据链式法则分配梯度
+        for i in range(len(self.r_idx)):
+            jac_joints[self.r_idx[i]] += dcost_dres[i, 0]
+            # 如果是镜像 (-1)，这里的负负得正，梯度是相同的
+            jac_joints[self.l_idx[i]] -= self.signs[i] * dcost_dres[i, 0] 
+            
+        # 把梯度加回总梯度数组中对应的关节位置
+        cost_grad[node.q_id.start + 6 : node.q_id.stop] += jac_joints

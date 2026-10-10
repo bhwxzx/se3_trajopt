@@ -193,7 +193,7 @@ class TerrainGridFrictionConstraints(AbstractConstraint):
 
             # delta force constraint
             if node_next is None:
-                return
+                continue
             f1 = state_vars[node_curr.forces_ids[frame]]
             if frame in node_next.contact_phase_fnames:
                 f2 = state_vars[node_next.forces_ids[frame]]
@@ -275,7 +275,7 @@ class TerrainGridFrictionConstraints(AbstractConstraint):
 
             # deltaforce
             if node_next is None:
-                return
+                continue
             if frame in node_next.contact_phase_fnames:
                 jac[node_curr.c_delta_force_ids[frame], node_next.forces_ids[frame]] = np.eye(3)
             jac[node_curr.c_delta_force_ids[frame], node_curr.forces_ids[frame]] = -np.eye(3)
@@ -294,7 +294,7 @@ class TerrainGridFrictionConstraints(AbstractConstraint):
 
             # deltaforce
             if node_next is None:
-                return
+                continue
             if frame in node_next.contact_phase_fnames:
                 extend_ids_lists(row_ids, col_ids, node_curr.c_delta_force_ids[frame], node_next.forces_ids[frame])
             extend_ids_lists(row_ids, col_ids, node_curr.c_delta_force_ids[frame], node_curr.forces_ids[frame])
