@@ -29,7 +29,7 @@ terrain.set_zero()
 robot = LW_Wheel()
 q = robot.go_neutral()
 q_end = robot.go_end()
-q_end[0] += 0.1
+q_end[0] += 0.35
 
 contacts_dict = {
     "l_foot": robot.left_foot_frames,
@@ -42,13 +42,33 @@ contact_scheduler = ContactScheduler(robot.model, dt=DT, contact_frame_dict=cont
 
 contact_scheduler.add_phase(["l_wheel", "r_wheel"], 1.3) 
 k1 = len(contact_scheduler.contact_sequence_fnames)
-contact_scheduler.add_phase([], 0.4) 
+contact_scheduler.add_phase([], 0.35) 
 k2 = len(contact_scheduler.contact_sequence_fnames)
 contact_scheduler.add_phase(["l_foot", "r_foot"], 1.3) 
 
 frame_contact_seq = contact_scheduler.contact_sequence_fnames
 
 contact_frame_names = robot.left_foot_frames + robot.right_foot_frames + robot.left_wheel_frames + robot.right_wheel_frames
+
+left_joints =[
+    "left_hip_joint", "left_thigh_joint", "left_shank_joint", 
+    "left_foot_joint", "left_wheel_joint"
+]
+right_joints =[
+    "right_hip_joint", "right_thigh_joint", "right_shank_joint", 
+    "right_foot_joint", "right_wheel_joint"
+]
+
+# 动态获取它们在优化器关节向量中的索引 (减去基座的 6 维)
+l_idx = [robot.model.joints[robot.model.getJointId(name)].idx_v - 6 for name in left_joints]
+r_idx =[robot.model.joints[robot.model.getJointId(name)].idx_v - 6 for name in right_joints]
+
+# 设置对称符号。因为左右腿 Pitch 轴互为相反数，所以全是 -1
+sym_signs = [-1, -1, -1, -1, -1]
+
+# 定义 5 对关节的不对称惩罚权重
+# 分别对应：Hip, Thigh, Shank, Foot, Wheel
+sym_weight = np.diag([50.0, 100.0, 200.0, 1.0, 0.0])
 
 stages = []
 K = len(frame_contact_seq)
@@ -98,17 +118,17 @@ for k, contact_phase_fnames in enumerate(frame_contact_seq):
     elif k1 <= k < k2:
         # 【腾空变形期】
         pos_weight = np.diag([0.0, 100.0, 0.0])
-        rot_weight = np.diag([300.0, 200.0, 400.0]) 
+        rot_weight = np.diag([300.0, 400.0, 400.0]) 
         joint_weight = np.diag([200, 0.5, 0.5, 0.0, 0.0, 200, 0.5, 0.5, 0.0, 0.0])
         ref_joints = q_end[7:] 
 
-        stage_node.costs_list.extend([BaseRotVelocityCost(np.zeros(3), np.eye(3) * 1e-2)])
+        stage_node.costs_list.extend([BaseRotVelocityCost(np.zeros(3), np.eye(3) * 1e-1)])
         
     else:
         # 【足式落地与缓冲】
-        pos_weight = np.diag([0.0, 100.0, 10.0])
-        rot_weight = np.diag([100.0, 100.0, 0.0]) 
-        joint_weight = np.diag([10, 0.0, 0.0, 0.0, 0.0, 10, 0.0, 0.0, 0.0, 0.0])
+        pos_weight = np.diag([0.0, 100.0, 25.0])
+        rot_weight = np.diag([200.0, 100.0, 0.0]) 
+        joint_weight = np.diag([10, 0.01, 0.01, 0.0, 0.0, 10, 0.01, 0.01, 0.0, 0.0])
         force_weight = np.diag([0.0, 0.0, 1e-3])
         ref_joints = q_end[7:]
 
@@ -122,6 +142,8 @@ for k, contact_phase_fnames in enumerate(frame_contact_seq):
     stage_node.costs_list.extend([BaseRotationCost(target_rotation, rot_weight)])
 
     stage_node.costs_list.extend([ConfigurationCost(ref_joints, joint_weight)])
+
+    stage_node.costs_list.extend([JointSymmetryCost(r_idx, l_idx, sym_weight, sym_signs)])
     
     stage_node.costs_list.extend([JointVelocityCost(np.zeros((robot.model.nv - 6,)), np.eye(robot.model.nv - 6) * 1e-2)])
     stage_node.costs_list.extend([JointAccelerationCost(np.zeros(robot.model.nv - 6), np.eye(robot.model.nv - 6) * 1e-5)])
