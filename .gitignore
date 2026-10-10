@@ -7,3 +7,7 @@ meshcat-env
 *.txt
 **trajopt_solutions**
 .conda/
+
+# 本地维护证据和会话交接记录
+/.agents/maintenance/
+/.agents/handoffs/
