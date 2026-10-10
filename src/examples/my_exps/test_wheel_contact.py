@@ -24,7 +24,7 @@ class WheelContactTests(unittest.TestCase):
         # Use retained archived nodes without running an optimizer. A small set
         # covers stance, flight, touchdown and terminal wheel support; dense
         # derivative checks do not require the complete 201-node trajectory.
-        source = ROOT / "trajopt_solutions_batch/leg_to_wheel_test/current_script_rerun_20261010_002133/trajopt_solutions_batch/leg_to_wheel/leg_to_wheel_10102026_003149.json"
+        source = ROOT / "src/tests/fixtures/lw_wheel_contact_nodes.json"
         cls.saved = json.loads(source.read_text())
         full_problem, cls.robot, _ = build_problem(wheel_contact=True)
         selected = (0, 77, 78, 92, 93, 200)
@@ -35,7 +35,6 @@ class WheelContactTests(unittest.TestCase):
             dt=full_problem.dt,
         )
         cls.problem.wheel_contact_model = full_problem.wheel_contact_model
-        cls.saved["solution"]["nodes"] = [cls.saved["solution"]["nodes"][k] for k in selected]
         cls.wheels = cls.problem.wheel_contact_model
         cls.w = pack_saved_nodes(cls.problem, cls.saved)
         add_landing_costs(cls.problem, .5, 10., 5., True)
